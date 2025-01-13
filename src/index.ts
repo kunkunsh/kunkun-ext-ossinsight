@@ -33,17 +33,21 @@ class TrendingRepos extends WorkerExtension {
     console.log(trendingRepos);
 
     return ui
-      .setSearchBarPlaceholder("Enter a search term, and press enter to search")
+      .setSearchBarPlaceholder(
+        "Enter a search term, and press enter to open the repo"
+      )
       .then(() => {
         return ui.render(
           new List.List({
             items: trendingRepos.data?.data.rows.map(
               (repo) =>
                 new List.Item({
+                  icon: new Icon({
+                    type: IconEnum.Iconify,
+                    value: "mdi:github",
+                  }),
                   title: repo.repo_name ?? "N/A",
-                  value: repo.repo_name
-                    ? `https://github.com/${repo.repo_name}`
-                    : "N/A",
+                  value: repo.repo_name ?? "N/A",
                   subTitle: `Language: ${
                     repo.primary_language ?? "N/A"
                   }; Stars: ${repo.stars ?? "N/A"}`,
@@ -70,8 +74,8 @@ class TrendingRepos extends WorkerExtension {
   }
 
   onListItemSelected(value: string): Promise<void> {
-    if (value.startsWith("https://github.com/")) {
-      open.url(value);
+    if (value !== "N/A") {
+      open.url(`https://github.com/${value}`);
     }
     return Promise.resolve();
   }
