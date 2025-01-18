@@ -4,6 +4,8 @@
 name: NPM Package Publish
 
 on:
+  push:
+    branches: [main]
   release:
     types: [created]
   workflow_dispatch:
@@ -17,6 +19,7 @@ jobs:
       - name: Test
         run: |
           bun install
+          bun run build
           bun test --coverage
 
   publish-npm:
