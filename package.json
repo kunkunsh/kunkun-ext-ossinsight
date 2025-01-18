@@ -2,7 +2,7 @@
   "license": "MIT",
   "$schema": "https://schema.kunkun.sh",
   "name": "kunkun-ext-ossinsight",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "repository": {
     "type": "git",
@@ -57,8 +57,10 @@
     "typescript": "^5.7.3"
   },
   "files": [
-    "demo-images",
     "dist",
-    ".gitignore"
+    "demo-images",
+    "README.md",
+    "package.json",
+    "mod.ts"
   ]
 }

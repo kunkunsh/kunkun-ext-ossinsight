@@ -11,19 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-      - name: Test
-        run: |
-          bun install
-          bun run build
-          bun test --coverage
-
   publish-npm:
-    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -34,6 +22,11 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+      - uses: oven-sh/setup-bun@v2
+      - name: Test
+        run: |
+          bun install
+          bun run build
       - run: |
           PACKAGE_NAME=$(jq -r '.name' package.json)
           PACKAGE_VERSION=$(jq -r '.version' package.json)
