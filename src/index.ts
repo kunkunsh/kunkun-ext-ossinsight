@@ -12,14 +12,14 @@ import {
   shell,
   toast,
   ui,
-  WorkerExtension,
-} from "@kksh/api/ui/worker";
+  TemplateUiCommand,
+} from "@kksh/api/ui/template";
 import { client, listTrendingRepos } from "@hk/ossinsight-client/heyapi";
 client.setConfig({
   baseUrl: "https://api.ossinsight.io/v1",
 });
 
-class TrendingRepos extends WorkerExtension {
+class TrendingRepos extends TemplateUiCommand {
   async onFormSubmit(value: Record<string, any>): Promise<void> {
     console.log("Form submitted", value);
     toast.success(`Form submitted: ${JSON.stringify(value)}`);
